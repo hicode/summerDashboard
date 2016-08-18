@@ -2,77 +2,83 @@
 <div class="page-bar">
     <ul class="page-breadcrumb">
         <li>
-            <a href="#/dashboard.html">Home</a>
+            <a href="/dashboard">Home</a>
             <i class="fa fa-circle"></i>
         </li>
         <li>
-            <a href="#/blank.html">Blank Page</a>
+            <a href="/createTest">Progress</a>
         </li>
     </ul>
-    <div class="page-toolbar">
-        <div class="btn-group pull-right">
-            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
-                <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="#">
-                        <i class="icon-user"></i> New User </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-present"></i> New Event
-                        <span class="badge badge-success">4</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-basket"></i> New order </a>
-                </li>
-                <li class="divider"> </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-flag"></i> Pending Orders
-                        <span class="badge badge-danger">4</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon-users"></i> Pending Users
-                        <span class="badge badge-warning">12</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
-<h3 class="page-title"> Blank Page
-    <small>blank page template</small>
-</h3>
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
 <div class="row" ng-controller="BlankController">
-    <div class="col-md-12">
-        <!-- BEGIN: ACCORDION DEMO -->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-green-sharp">
-                    <i class="icon-settings font-green-sharp"></i>
-                    <span class="caption-subject bold uppercase">Page Portlet</span>
-                    <span class="caption-helper hide"></span>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1> Daily Progress </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h3> Team Members </h3>
+                <br />
+                <div class="col-xs-4">
+                    <img class="img-thumbnail" src="http://placehold.it/200x200" alt="">
                 </div>
-                <div class="actions">
-                    <a class="btn btn-circle btn-icon-only btn-default" href="#">
-                        <i class="icon-cloud-upload"></i>
-                    </a>
-                    <a class="btn btn-circle btn-icon-only btn-default" href="#">
-                        <i class="icon-wrench"></i>
-                    </a>
+                <div class="col-xs-4">
+                    <img class="img-thumbnail" src="http://placehold.it/200x200" alt="">
+                </div>
+                <div class="col-xs-4">
+                    <img class="img-thumbnail" src="http://placehold.it/200x200" alt="">
                 </div>
             </div>
-            <div class="portlet-body"> Blank page content goes here... </div>
+            <br />
+            <hr />
         </div>
-    </div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h3> Progress </h3>
+                <br />
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: 40%"><span class="sr-only">40% Complete (success)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span>
+                    </div>
+                    <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <br />
+            <hr />
+            <div class="col-xs-6 row">
+                <h3 class="text-center "> Locations </h3>
+                <ul>
+                    <li><a href="/progressDetail">
+                        <button type="button" class="btn btn-lg btn-primary col-xs-12 buttonPadding"> <span class="pull-left"> CP 695 </span> <i class="fa fa-chevron-right pull-right arrowTopPadding"></i></button>
+                    </a></li>
+                    <li><a href="/progressDetail">
+                        <button type="button" class="btn btn-lg btn-primary col-xs-12 buttonPadding"> <span class="pull-left"> CP 696 </span> <i class="fa fa-chevron-right pull-right arrowTopPadding"></i></button>
+                    </a></li>
+                    <li><a href="/progressDetail">
+                        <button type="button" class="btn btn-lg btn-primary col-xs-12 buttonPadding"> <span class="pull-left"> CP 697 </span> <i class="fa fa-chevron-right pull-right arrowTopPadding"></i></button>
+                    </a></li>
+                </ul>
+
+                <br />
+            </div>
+            <div class="col-xs-6 row">
+                <h3 class="text-center"> Graphs </h3>
+            </div>
+        </div>
+        
+    </div> 
 </div>
 <!-- END MAIN CONTENT -->
 <!-- BEGIN MAIN JS-->

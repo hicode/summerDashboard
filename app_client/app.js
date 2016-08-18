@@ -1,5 +1,5 @@
 /* Metronic App */
-var MetronicApp = angular.module("MetronicApp", [
+var alliedMobile = angular.module("alliedMobile", [
     "ui.router", 
     "ui.bootstrap", 
     "oc.lazyLoad",  
@@ -7,19 +7,16 @@ var MetronicApp = angular.module("MetronicApp", [
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
-MetronicApp.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
+alliedMobile.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
     $ocLazyLoadProvider.config({
         // global configs go here
     });
 }]);
 
 
-/********************************************
- END: BREAKING CHANGE in AngularJS v1.3.x:
-*********************************************/
 
 /* Setup global settings */
-MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
+alliedMobile.factory('settings', ['$rootScope', function($rootScope) {
     // supported languages
     var settings = {
         layout: {
@@ -39,7 +36,7 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
+alliedMobile.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.$on('$viewContentLoaded', function() {
         //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
@@ -53,21 +50,21 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', function($scope) {
+alliedMobile.controller('HeaderController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
 }]);
 
 /* Setup Layout Part - Sidebar */
-MetronicApp.controller('SidebarController', ['$scope', function($scope) {
+alliedMobile.controller('SidebarController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar(); // init sidebar
     });
 }]);
 
 /* Setup Layout Part - Quick Sidebar */
-MetronicApp.controller('QuickSidebarController', ['$scope', function($scope) {    
+alliedMobile.controller('QuickSidebarController', ['$scope', function($scope) {    
     $scope.$on('$includeContentLoaded', function() {
        setTimeout(function(){
             QuickSidebar.init(); // init quick sidebar        
@@ -76,36 +73,36 @@ MetronicApp.controller('QuickSidebarController', ['$scope', function($scope) {
 }]);
 
 /* Setup Layout Part - Theme Panel */
-MetronicApp.controller('ThemePanelController', ['$scope', function($scope) {    
+alliedMobile.controller('ThemePanelController', ['$scope', function($scope) {    
     $scope.$on('$includeContentLoaded', function() {
         Demo.init(); // init theme panel
     });
 }]);
 
 /* Setup Layout Part - Footer */
-MetronicApp.controller('FooterController', ['$scope', function($scope) {
+alliedMobile.controller('FooterController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initFooter(); // init footer
     });
 }]);
 
 /* Setup Rounting For All Pages */
-MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
     // Redirect any unmatched url
-    $urlRouterProvider.otherwise("/dashboard.html");  
+    $urlRouterProvider.otherwise("/dashboard");  
 
     $stateProvider
 
         // Dashboard
         .state('dashboard', {
-            url: "/dashboard.html",
+            url: "/dashboard",
             templateUrl: "alliedMobile/views/dashboard.html",            
             data: {pageTitle: 'Admin Dashboard Template'},
             controller: "DashboardController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'MetronicApp',
+                        name: 'alliedMobile',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
                             'assets/global/plugins/morris/morris.css',                            
@@ -130,7 +127,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'MetronicApp',
+                        name: 'alliedMobile',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
                             'alliedMobile/js/controllers/BlankController.js'
@@ -144,15 +141,80 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('createTest', {
             url: "/createTest",
             templateUrl: "alliedMobile/views/createTest.html",            
-            data: {pageTitle: 'Create Test'},
-            controller: "BlankController",
+            data: {
+                pageTitle: 'Progress'
+            },
+            controller: "createTestController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'MetronicApp',
+                        name: 'alliedMobile',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            'alliedMobile/js/controllers/BlankController.js'
+                            'alliedMobile/js/controllers/createTestController.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
+        /* Add Equipment */
+        .state('addEquipment', {
+            url: "/addEquipment",
+            templateUrl: "alliedMobile/views/addEquipment.html",            
+            data: {
+                pageTitle: 'Progress'
+            },
+            controller: "equipmentCtrl",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'alliedMobile',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            'alliedMobile/js/controllers/equipmentCtrl.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
+        /* Test Block Creation */
+        .state('createBlocks', {
+            url: "/createBlocks",
+            templateUrl: "alliedMobile/views/createBlocks.html",            
+            data: {
+                pageTitle: 'Create Blocks'
+            },
+            controller: "blockCtrl",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'alliedMobile',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            'alliedMobile/js/controllers/blockCtrl.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
+        /* Completed Tests */
+        .state('testArchive', {
+            url: "/testArchive",
+            templateUrl: "alliedMobile/views/testArchive.html",            
+            data: {
+                pageTitle: 'Test Archive'
+            },
+            controller: "archiveCtrl",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'alliedMobile',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            'alliedMobile/js/controllers/archiveCtrl.js'
                         ] 
                     });
                 }]
@@ -160,10 +222,14 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         })
 
 
+        $locationProvider.html5Mode({
+          enabled: true,
+          requireBase: false
+        });
 }]);
 
 /* Init global settings and run the app */
-MetronicApp.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
+alliedMobile.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
     $rootScope.$settings = settings; // state to be accessed from view
 }]);
