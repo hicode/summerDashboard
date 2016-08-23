@@ -1,5 +1,5 @@
-/* Metronic App */
-var alliedMobile = angular.module("alliedMobile", [
+/* Summer Example */
+var summerDashboard = angular.module("summerDashboard", [
     "ui.router", 
     "ui.bootstrap", 
     "oc.lazyLoad",  
@@ -7,7 +7,7 @@ var alliedMobile = angular.module("alliedMobile", [
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
-alliedMobile.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
+summerDashboard.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
     $ocLazyLoadProvider.config({
         // global configs go here
     });
@@ -16,7 +16,7 @@ alliedMobile.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
 
 
 /* Setup global settings */
-alliedMobile.factory('settings', ['$rootScope', function($rootScope) {
+summerDashboard.factory('settings', ['$rootScope', function($rootScope) {
     // supported languages
     var settings = {
         layout: {
@@ -36,7 +36,7 @@ alliedMobile.factory('settings', ['$rootScope', function($rootScope) {
 }]);
 
 /* Setup App Main Controller */
-alliedMobile.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
+summerDashboard.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.$on('$viewContentLoaded', function() {
         //App.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
@@ -50,21 +50,21 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-alliedMobile.controller('HeaderController', ['$scope', function($scope) {
+summerDashboard.controller('HeaderController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
 }]);
 
 /* Setup Layout Part - Sidebar */
-alliedMobile.controller('SidebarController', ['$scope', function($scope) {
+summerDashboard.controller('SidebarController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initSidebar(); // init sidebar
     });
 }]);
 
 /* Setup Layout Part - Quick Sidebar */
-alliedMobile.controller('QuickSidebarController', ['$scope', function($scope) {    
+summerDashboard.controller('QuickSidebarController', ['$scope', function($scope) {    
     $scope.$on('$includeContentLoaded', function() {
        setTimeout(function(){
             QuickSidebar.init(); // init quick sidebar        
@@ -73,21 +73,21 @@ alliedMobile.controller('QuickSidebarController', ['$scope', function($scope) {
 }]);
 
 /* Setup Layout Part - Theme Panel */
-alliedMobile.controller('ThemePanelController', ['$scope', function($scope) {    
+summerDashboard.controller('ThemePanelController', ['$scope', function($scope) {    
     $scope.$on('$includeContentLoaded', function() {
         Demo.init(); // init theme panel
     });
 }]);
 
 /* Setup Layout Part - Footer */
-alliedMobile.controller('FooterController', ['$scope', function($scope) {
+summerDashboard.controller('FooterController', ['$scope', function($scope) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initFooter(); // init footer
     });
 }]);
 
 /* Setup Rounting For All Pages */
-alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+summerDashboard.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
     // Redirect any unmatched url
     $urlRouterProvider.otherwise("/dashboard");  
 
@@ -96,13 +96,13 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
         // Dashboard
         .state('dashboard', {
             url: "/dashboard",
-            templateUrl: "alliedMobile/views/dashboard.html",            
+            templateUrl: "summerDashboard/views/dashboard.html",            
             data: {pageTitle: 'Admin Dashboard Template'},
             controller: "DashboardController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'alliedMobile',
+                        name: 'summerDashboard',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
                             'assets/global/plugins/morris/morris.css',                            
@@ -111,7 +111,7 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
                             'assets/global/plugins/jquery.sparkline.min.js',
 
                             'assets/pages/scripts/dashboard.min.js',
-                            'alliedMobile/js/controllers/DashboardController.js',
+                            'summerDashboard/js/controllers/DashboardController.js',
                         ] 
                     });
                 }]
@@ -121,16 +121,16 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
         // Blank Page
         .state('blank', {
             url: "/blank",
-            templateUrl: "alliedMobile/views/blank.html",            
+            templateUrl: "summerDashboard/views/blank.html",            
             data: {pageTitle: 'Blank Page Template'},
             controller: "BlankController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'alliedMobile',
+                        name: 'summerDashboard',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            'alliedMobile/js/controllers/BlankController.js'
+                            'summerDashboard/js/controllers/BlankController.js'
                         ] 
                     });
                 }]
@@ -140,7 +140,7 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
         // Blank Page
         .state('createTest', {
             url: "/createTest",
-            templateUrl: "alliedMobile/views/createTest.html",            
+            templateUrl: "summerDashboard/views/createTest.html",            
             data: {
                 pageTitle: 'Progress'
             },
@@ -148,10 +148,10 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'alliedMobile',
+                        name: 'summerDashboard',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            'alliedMobile/js/controllers/createTestController.js'
+                            'summerDashboard/js/controllers/createTestController.js'
                         ] 
                     });
                 }]
@@ -161,7 +161,7 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
         /* Add Equipment */
         .state('addEquipment', {
             url: "/addEquipment",
-            templateUrl: "alliedMobile/views/addEquipment.html",            
+            templateUrl: "summerDashboard/views/addEquipment.html",            
             data: {
                 pageTitle: 'Progress'
             },
@@ -169,10 +169,10 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'alliedMobile',
+                        name: 'summerDashboard',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            'alliedMobile/js/controllers/equipmentCtrl.js'
+                            'summerDashboard/js/controllers/equipmentCtrl.js'
                         ] 
                     });
                 }]
@@ -182,7 +182,7 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
         /* Test Block Creation */
         .state('createBlocks', {
             url: "/createBlocks",
-            templateUrl: "alliedMobile/views/createBlocks.html",            
+            templateUrl: "summerDashboard/views/createBlocks.html",            
             data: {
                 pageTitle: 'Create Blocks'
             },
@@ -190,10 +190,10 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'alliedMobile',
+                        name: 'summerDashboard',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            'alliedMobile/js/controllers/blockCtrl.js'
+                            'summerDashboard/js/controllers/blockCtrl.js'
                         ] 
                     });
                 }]
@@ -203,7 +203,7 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
         /* Completed Tests */
         .state('testArchive', {
             url: "/testArchive",
-            templateUrl: "alliedMobile/views/testArchive.html",            
+            templateUrl: "summerDashboard/views/testArchive.html",            
             data: {
                 pageTitle: 'Test Archive'
             },
@@ -211,10 +211,10 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
-                        name: 'alliedMobile',
+                        name: 'summerDashboard',
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
-                            'alliedMobile/js/controllers/archiveCtrl.js'
+                            'summerDashboard/js/controllers/archiveCtrl.js'
                         ] 
                     });
                 }]
@@ -229,7 +229,7 @@ alliedMobile.config(['$stateProvider', '$urlRouterProvider', '$locationProvider'
 }]);
 
 /* Init global settings and run the app */
-alliedMobile.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
+summerDashboard.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
     $rootScope.$settings = settings; // state to be accessed from view
 }]);
