@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'mongodb://40.117.154.84:27017';
+// TODO: Add Database Connection for Example On Github
+var dbURI = 'mongodb://XXX.XXX.XXX.XXX';
 
 if (process.env.NODE_ENV === 'production') {
-    dbURI = 'mongodb://40.117.154.84:27017';
+// TODO: Add Database Connection for Example On Github
+    dbURI = 'mongodb://XXX.XXX.XXX.XXX';
 }
 
 mongoose.connect(dbURI);
